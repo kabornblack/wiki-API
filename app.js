@@ -46,6 +46,20 @@ app.get("/articles", function(req, res) {
   })
 });
 
+app.post("/articles", function(req, res) {
+  const newArticle = new Article({
+    title: req.body.title,
+    content: req.body.content
+  });
+  newArticle.save()
+  .then((savedArticle) => {
+  res.send(savedArticle);
+})
+.catch((err) => {
+  res.send(err);
+  });
+});
+
 app.listen(8000, function() {
   console.log("Server started on port 8000");
 });
